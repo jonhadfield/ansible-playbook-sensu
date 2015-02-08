@@ -23,6 +23,9 @@
   service: name=redis state=started enabled=yes
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
+- name: configure sensu to use redis
+  copy: src=redis.json dest=/etc/sensu/conf.d/redis.json mode=0644
+
 - name: enable sensu-{server,api} to survive reboot
   service: name=sensu-{{ item }} enabled=yes
   with_items:
