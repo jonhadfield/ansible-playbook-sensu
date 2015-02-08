@@ -1,4 +1,28 @@
 ---
+- name: install erlang (Debian/Ubuntu)
+  apt: name=erlang-nox state=present
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: install erlang (EL)
+  yum: name=erlang state=present
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: install redis
+  apt: name=redis-server state=present
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: install redis
+  yum: name=redis state=present
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: ensure redis is started and runs at boot (Debian/Ubuntu)
+  service: name=redis-server state=started enabled=yes
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: ensure redis is started and runs at boot (EL)
+  service: name=redis state=started enabled=yes
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
 - name: enable sensu-{server,api} to survive reboot
   service: name=sensu-{{ item }} enabled=yes
   with_items:
