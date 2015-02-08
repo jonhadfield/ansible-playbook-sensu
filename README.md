@@ -27,8 +27,6 @@ Just use Galaxy:
 `sensu_install_server`|Boolean|Determine if we need to install the server part|`true`
 `sensu_user`|String|The user running sensu|`sensu`
 `sensu_group`|String|the group running sensu|`sensu`
-`sensu_client_hostname`|String|Hostname of this client|`"localhost"`
-`sensu_client_address`|String|Address of this client|`"127.0.0.1"`
 `sensu_client_subscription_names`|List|List of test to execute on this client| `[test]`
 `sensu_server_redis_host`|String|Hostname of the Redis server|`"127.0.0.1"`
 `sensu_server_api_host`|String|Adress of the Sensu API server|`"127.0.0.1"`
