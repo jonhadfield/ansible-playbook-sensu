@@ -22,9 +22,12 @@
   notify:
     - restart sensu client
 
-- name: install rubygems (debian and ubuntu)
-  apt: name=rubygems1.9.1 state=present
+- name: install rubygems and dependencies (debian and ubuntu)
+  apt: name={{ item }} state=present
   when: sensu_client_install_rubygems and (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu')
+  with_items:
+    - ruby1.9.1-dev
+    - rubygems1.9.1
 
 - name: install rubygems and dependencies (rhel)
   yum: name={{ item }} state=present
