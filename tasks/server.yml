@@ -43,6 +43,17 @@
     - restart sensu server
     - restart sensu client
 
+- name: generate pushover.json
+  template:
+    src=handlers/pushover.json.j2
+    dest=/etc/sensu/handlers/pushover.json
+    owner="{{ sensu_user }}"
+    group="{{ sensu_group }}"
+    mode=0750
+  notify:
+    - restart sensu server
+    - restart sensu client
+
 - name: generate /etc/sensu/conf.d/handlers.json
   template:
     src=handlers.json.j2
