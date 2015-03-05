@@ -26,6 +26,17 @@
 - name: configure sensu to use redis
   copy: src=redis.json dest=/etc/sensu/conf.d/redis.json mode=0644
 
+- name: generate /etc/sensu/conf.d/api.json
+  template:
+    src=api.json.j2
+    dest=/etc/sensu/conf.d/api.json
+    owner="{{ sensu_user }}"
+    group="{{ sensu_group }}"
+    mode=0750
+  notify:
+    - restart sensu server
+    - restart sensu api
+
 - name: enable sensu-{server,api} to survive reboot
   service: name=sensu-{{ item }} enabled=yes
   with_items:
@@ -41,12 +52,12 @@
     mode=0750
   notify:
     - restart sensu server
-    - restart sensu client
+    - restart sensu api
 
 - name: generate pushover.json
   template:
     src=handlers/pushover.json.j2
-    dest=/etc/sensu/handlers/pushover.json
+    dest=/etc/sensu/conf.d/pushover.json
     owner="{{ sensu_user }}"
     group="{{ sensu_group }}"
     mode=0750
