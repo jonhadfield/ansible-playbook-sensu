@@ -59,18 +59,6 @@
     - cert
     - key
 
-#- name: generate /etc/sensu/config.json
-#  template:
-#    src=sensu.config.json.j2
-#    dest=/etc/sensu/config.json
-#    owner="{{ sensu_user }}"
-#    group="{{ sensu_group }}"
-#    mode=0640
-#    backup=yes
-#  notify:
-#    - restart sensu server
-#    - restart sensu client
-
 - name: generate rabbitmq.json
   template:
     src=rabbitmq.json.j2

@@ -77,7 +77,7 @@
 
 - name: copy the handlers files
   copy:
-    src=sensu/handlers/
+    src=handlers/
     dest=/etc/sensu/handlers/
     owner="{{ sensu_user }}"
     group="{{ sensu_group }}"
@@ -87,7 +87,7 @@
 
 - name: copy extension files
   copy:
-    src=sensu/extensions/
+    src=extensions/
     dest=/etc/sensu/extensions/
     owner=sensu
     group=sensu
@@ -97,7 +97,7 @@
 
 - name: copy conf.d files
   copy:
-    src=sensu/conf.d/
+    src=conf.d/
     dest=/etc/sensu/conf.d/
     owner=sensu
     group=sensu
