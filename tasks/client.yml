@@ -1,6 +1,6 @@
 ---
 - name: enable sensu-client to survive reboot
-  service: name=sensu-client enabled=yes
+  service: name=sensu-client enabled=yes state=started
 
 - name: generate /etc/sensu/conf.d/client.json
   template:
