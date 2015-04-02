@@ -1,7 +1,4 @@
 ---
-- name: enable sensu-client to survive reboot
-  service: name=sensu-client enabled=yes state=started
-
 - name: generate /etc/sensu/conf.d/client.json
   template:
     src=sensu.client.json.j2
@@ -40,3 +37,6 @@
 - name: install community plugins
   gem: name=sensu-plugin state=present
   when: sensu_client_install_community_plugins
+
+- name: enable sensu-client to survive reboot
+  service: name=sensu-client enabled=yes state=started
